@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Mike Stackhouse" />
+
+<meta name="date" content="2020-05-14" />
+
+<title>Huxtable Tips</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Huxtable Tips</h1>
+<h4 class="author">Mike Stackhouse</h4>
+<h4 class="date">2020-05-14</h4>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>While pharmaRTF can cover your titles, footnotes, and encapsulating document properties - a key feature to creating the tables you need is having a good understand of huxtable. Huxtable has plenty of great user documentation within its own vignettes, available <a href="https://hughjonesd.github.io/huxtable/">here</a>, but within this vignette we will cover some core features necessary to create beautiful tables.</p>
+</div>
+<div id="a-small-note" class="section level2">
+<h2>A Small Note</h2>
+<p>Some of the syntax we use throughout this document uses the <code>%&gt;%</code> pipe operator. This is to display support for a tidyverse style of coding. You can find the <code>%&gt;%</code> operator in the <a href="https://cran.r-project.org/package=magrittr/vignettes/magrittr.html">magittr</a> package.</p>
+</div>
+<div id="huxtable-basics" class="section level2">
+<h2>Huxtable Basics</h2>
+<p>Something important to understand about huxtable is that it starts as an abstraction of a data frame. This means that in general, you can index and slice the huxtable object the same way you would with a normal <code>data.frame</code> object in R.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">ht &lt;-<span class="st"> </span>huxtable<span class="op">::</span><span class="kw">as_hux</span>(iris[, <span class="kw">c</span>(<span class="st">&quot;Species&quot;</span>, <span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>, <span class="st">&quot;Petal.Length&quot;</span>, <span class="st">&quot;Petal.Width&quot;</span>)], </a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">                       <span class="dt">add_colnames=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">ht[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="kw">c</span>(<span class="st">'Species'</span>, <span class="st">'Petal.Width'</span>)]</a></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
+<col><col><tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Species</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Petal.Width</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.4</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+</table>
+
+<p>As you can see here, a nice feature of huxtable is that it has a lot of automatic printing options. Within the code of an R markdown file, it automatically outputs as an HTML table. When developing within an R script, it will also print formatted text to your console. This can be very useful for development as you get an idea of how your display will look within the RTF document.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">huxtable<span class="op">::</span><span class="kw">print_screen</span>(ht[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt;   Species   Sepal.Length   Sepal.Width   Petal.Length   Petal.Width  </span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;   setosa             5.1           3.5            1.4           0.2  </span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;   setosa             4.9           3              1.4           0.2  </span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;   setosa             4.7           3.2            1.3           0.2  </span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;   setosa             4.6           3.1            1.5           0.2  </span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt;   setosa             5             3.6            1.4           0.2  </span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt;   setosa             5.4           3.9            1.7           0.4  </span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;   setosa             4.6           3.4            1.4           0.3  </span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;   setosa             5             3.4            1.5           0.2  </span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;   setosa             4.4           2.9            1.4           0.2  </span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; Column names: Species, Sepal.Length, Sepal.Width, Petal.Length, Petal.Width</span></a></code></pre></div>
+</div>
+<div id="changing-table-shape" class="section level2">
+<h2>Changing Table Shape</h2>
+<p>One thing to note is that the default width of a huxtable table will not fill a whole landscape RTF document (when the page size is 11&quot; x 8.5&quot;). A good rule of thumb to follow is that setting the huxtable table width to 1.5 will fill the page properly</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Assign the attribute</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">huxtable<span class="op">::</span><span class="kw">width</span>(ht) &lt;-<span class="st"> </span><span class="fl">1.5</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># Pipe the attribute</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">ht &lt;-<span class="st"> </span>ht <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">set_width</span>(<span class="fl">1.5</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">ht[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 150%; margin-left: auto; margin-right: auto;  ">
+<col><col><col><col><col><tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Species</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sepal.Length</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sepal.Width</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Petal.Length</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Petal.Width</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.1</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.5</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.9</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3&nbsp;&nbsp;</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.7</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.2</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.3</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.1</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5&nbsp;&nbsp;</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.6</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.9</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.7</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.4</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5&nbsp;&nbsp;</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">2.9</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+</table>
+
+<p>By default, all columns will have an equal width. You can set individual column widths as a ratio of the total width using the <code>col_width</code> property functions. Note that you want these values to sum to 1 - if they are less than one, the columns won’t fill up the total width of the table</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Assign the attribute</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">huxtable<span class="op">::</span><span class="kw">col_width</span>(ht) &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">4</span>, <span class="fl">.15</span>, <span class="fl">.15</span>, <span class="fl">.15</span>, <span class="fl">.15</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># Pipe the attribute</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">ht &lt;-<span class="st"> </span>ht <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">set_col_width</span>(<span class="kw">c</span>(.<span class="dv">4</span>, <span class="fl">.15</span>, <span class="fl">.15</span>, <span class="fl">.15</span>, <span class="fl">.15</span>))</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">ht[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 150%; margin-left: auto; margin-right: auto;  ">
+<col style="width: 40%"><col style="width: 15%"><col style="width: 15%"><col style="width: 15%"><col style="width: 15%"><tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Species</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sepal.Length</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sepal.Width</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Petal.Length</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Petal.Width</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.1</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.5</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.9</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3&nbsp;&nbsp;</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.7</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.2</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.3</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.1</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5&nbsp;&nbsp;</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.6</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.9</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.7</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.4</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5&nbsp;&nbsp;</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">2.9</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+</table>
+
+</div>
+<div id="column-headers" class="section level2">
+<h2>Column Headers</h2>
+<p>The <code>add_colnames</code> argument inserts the column names into the huxtable table. Something important to understand here is that this argument actually inserts the column names as the first row of the table. Therefore, there are no special properties of the column names compared to other data points within the table:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">ht[<span class="dv">1</span>,]</a></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 150%; margin-left: auto; margin-right: auto;  ">
+<col style="width: 40%"><col style="width: 15%"><col style="width: 15%"><col style="width: 15%"><col style="width: 15%"><tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Species</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sepal.Length</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sepal.Width</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Petal.Length</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Petal.Width</td>
+</tr>
+</table>
+
+<p>This is important to understand, because it actually makes creating column headers very easy in that you don’t have to worry about the variable names in the data. Simply create a data frame of the desired column headers and bind it to the data, and then do not use the <code>add_colnames</code> argument.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">column_headers &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="dt">Species =</span> <span class="st">&quot;Species of Flower&quot;</span>,</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="dt">Sepal.Length =</span> <span class="st">&quot;Sepal Length&quot;</span>,</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="dt">Sepal.Width =</span> <span class="st">&quot;Sepal Width&quot;</span>,</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">  <span class="dt">Petal.Length =</span> <span class="st">&quot;Petal Length&quot;</span>,</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">  <span class="dt">Petal.Width =</span> <span class="st">&quot;Petal Width&quot;</span>,</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">)</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">ht &lt;-<span class="st"> </span>huxtable<span class="op">::</span><span class="kw">as_hux</span>(<span class="kw">rbind</span>(column_headers, iris))</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">ht[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
+<col><col><col><col><col><tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Species of Flower</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sepal Length</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Sepal Width</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Petal Length</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">Petal Width</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.9</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.7</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.2</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.3</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.9</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.7</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.4</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">2.9</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+</table>
+
+<p>Given that the column headers are just another row of the data frame, this also means that you can use multiple rows as your column headers. More on how to take advantage of that later.</p>
+</div>
+<div id="cell-formatting" class="section level2">
+<h2>Cell Formatting</h2>
+<p>Huxtable supports many different cell formatting properties, including borders, bold, italic, horizontal and vertical alignment, and cell padding. All of these tend to be important when creating outputs in clinical reports. To set a cell property, you simply specify the rows and columns you want to change and apply the property function. When in doubt, consult the documentation to understand the proper values. As with essentially all of the huxtable property functions, there are multiple methods of applying the property to suite your preferred syntax style.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Assign attributes directly to object</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">huxtable<span class="op">::</span><span class="kw">bold</span>(ht[<span class="dv">1</span>, ]) &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">huxtable<span class="op">::</span><span class="kw">italic</span>(ht[<span class="dv">2</span>, ]) &lt;-<span class="st"> </span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co"># Use piping</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">ht &lt;-<span class="st"> </span>ht <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="st">  </span><span class="co"># Bottom border top row</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">set_bottom_border</span>(<span class="dv">1</span>, <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(ht), <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="st">  </span><span class="co"># Thicker bottom border on 2nd row</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">set_bottom_border</span>(<span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(ht), <span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="st">  </span><span class="co"># Align the 3rd row, 2nd column right</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">set_align</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="st">'right'</span>) </a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">ht[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
+<col><col><col><col><col><tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Species of Flower</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sepal Length</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sepal Width</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Petal Length</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Petal Width</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-style: italic;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-style: italic;">5.1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-style: italic;">3.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-style: italic;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-style: italic;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.9</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.7</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.2</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.3</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.9</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.7</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.4</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">2.9</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+</table>
+
+</div>
+<div id="cell-merging" class="section level2">
+<h2>Cell Merging</h2>
+<p>Another very useful feature of huxtable is the ability to specify and merge cells. This is done simply by selecting the rows and columns you’d like to merge of the huxtable object. The top left cell’s value will take on the value of the merged cells.</p>
+<p>To tie this in with a practical example, think of spanning headers. As mentioned, since column headers are just rows of the huxtable object, we can create spanning headers by creating 2 rows of column headers and merging cells.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># Create the column headers data frame</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">column_headers &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="dt">Species =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;Species of Flower&quot;</span>),</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">  <span class="dt">Sepal.Length =</span> <span class="kw">c</span>(<span class="st">&quot;Sepal&quot;</span>, <span class="st">&quot;Length&quot;</span>),</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">  <span class="dt">Sepal.Width =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;Width&quot;</span>),</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">  <span class="dt">Petal.Length =</span> <span class="kw">c</span>(<span class="st">&quot;Petal&quot;</span>, <span class="st">&quot;Length&quot;</span>),</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">  <span class="dt">Petal.Width =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;Width&quot;</span>),</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">)</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co"># Create the huxtable table</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13">ht &lt;-<span class="st"> </span>huxtable<span class="op">::</span><span class="kw">as_hux</span>(<span class="kw">rbind</span>(column_headers, iris)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="st">  </span><span class="co"># Merge the Sepal cell over the Length and Width</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">merge_cells</span>(<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="st">  </span><span class="co"># Merge the Petal cell over the Length and Width</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">merge_cells</span>(<span class="dv">1</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="st">  </span><span class="co"># Align the top cells for both Sepal and Petal</span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">set_align</span>(<span class="dv">1</span>,<span class="dv">2</span>, <span class="st">'center'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">set_align</span>(<span class="dv">1</span>,<span class="dv">4</span>, <span class="st">'center'</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="st">  </span><span class="co"># Bold all the column header rows</span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">set_bold</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(iris), <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="st">  </span><span class="co"># Bottom border on 1st column header row </span></a>
+<a class="sourceLine" id="cb8-24" data-line-number="24"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">set_bottom_border</span>(<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-25" data-line-number="25"><span class="st">  </span><span class="co"># Bottom border on 2nd row</span></a>
+<a class="sourceLine" id="cb8-26" data-line-number="26"><span class="st">  </span>huxtable<span class="op">::</span><span class="kw">set_bottom_border</span>(<span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(iris), <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb8-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb8-28" data-line-number="28">ht[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 50%; margin-left: auto; margin-right: auto;  ">
+<col><col><col><col><col><tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"></td>
+<td colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sepal</td>
+<td colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Petal</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 2pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Species of Flower</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 2pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Length</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 2pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Width</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 2pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Length</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 2pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Width</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.9</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.7</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.2</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.3</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.9</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.7</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.4</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+</table>
+
+</div>
+<div id="some-final-notes" class="section level2">
+<h2>Some Final Notes</h2>
+<p>Getting your huxtable table right takes some experimentation, and when outputting to RTF it will take multiple iterations to get it right. One very important note is that it’s common to have to insert line breaks in your data manually - be it to make your data flow nicely within cells, or to organize column headers properly. Within pharmaRTF, for this you will need to use RTF syntax. Instead of the traditional <code>\n</code> - this is just <code>\line</code>. But in R, you need to add an extra backslash (<code>\</code>) because backslashes are break characters. So to insert a line break in your text, simply add <code>\\line</code>.</p>
+<p>A second step that you need to take is to set <code>escape_contents</code> to false. This is because by default, huxtable will do some cleaning when generating the output to try to catch certain syntax - and when the RTF generates, the escape character itself has been escaped. The result is that <code>\line</code> will appear in your document as text. Fortunately, this is just one extra line of code.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Overwrite the column header cell</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">ht[<span class="dv">2</span>, <span class="dv">1</span>] &lt;-<span class="st"> &quot;Species of</span><span class="ch">\\</span><span class="st">line flower&quot;</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co"># Set escape contents to false</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">huxtable<span class="op">::</span><span class="kw">escape_contents</span>(ht) &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># Set display width</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">huxtable<span class="op">::</span><span class="kw">width</span>(ht) &lt;-<span class="st"> </span><span class="fl">1.5</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">ht[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 150%; margin-left: auto; margin-right: auto;  ">
+<col><col><col><col><col><tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; font-weight: bold;"></td>
+<td colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Sepal</td>
+<td colspan="2" style="vertical-align: top; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Petal</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 2pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Species of\line flower</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 2pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Length</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 2pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Width</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 2pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Length</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 2pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">Width</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.9</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.7</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.2</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.3</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.9</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.7</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.4</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">4.6</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">setosa</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">3.4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">1.5</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">0.2</td>
+</tr>
+</table>
+
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">doc &lt;-<span class="st"> </span><span class="kw">rtf_doc</span>(ht, <span class="dt">header_rows =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">write_rtf</span>(doc, <span class="dt">file=</span><span class="st">'table4.rtf'</span>)</a></code></pre></div>
+<p>And within the RTF output, the lines will display properly.</p>
+<p><img src="data:image/png;base64,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" width="800px" /></p>
+</div>
+<div id="further-reading" class="section level2">
+<h2>Further Reading</h2>
+<p>Be sure to check out our other vignettes!</p>
+<ul>
+<li>To pick up the basics of using pharmaRTF, see <a href="https://atorus-research.github.io/pharmaRTF.html">this vignette</a></li>
+<li>To learn more advanced usage of pharmaRTF, see <a href="https://atorus-research.github.io/advanced_usage.html">this vignette</a></li>
+<li>To see how to read titles and footnotes from external files, see <a href="https://atorus-research.github.io/tf_from_file.html">this vignette</a></li>
+</ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

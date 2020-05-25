@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Mike Stackhouse" />
+
+<meta name="date" content="2020-05-14" />
+
+<title>Sourcing Titles and Footnotes From External Files</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Sourcing Titles and Footnotes From External Files</h1>
+<h4 class="author">Mike Stackhouse</h4>
+<h4 class="date">2020-05-14</h4>
+
+
+
+<p><em>We recommend that before reviewing this vignette, you review the <a href="https://atorus-research.github.io/pharmaRTF.html">basics of pharmaRTF</a> and <a href="https://atorus-research.github.io/advanced_usage.html">the more advanced features</a>.</em></p>
+<div id="working-pharmartf-into-your-process" class="section level2">
+<h2>Working pharmaRTF Into Your Process</h2>
+<p>In this vignette, we will take you through some final features of pharmaRTF to help tie together how this package can centralize titles and footnotes within your organization, and show you the tools you need to embed this into your own internal process.</p>
+<p>Being able to specify everything directly in a program is useful. For adhoc tables or to quickly put together an output, keeping everything central and in one spot is nice. But in a mature process, companies typically have a strategy to centralize the assignment of titles and footnotes. Keeping all of your titles and footnotes in one place has many advantages. You can global replace changes that impact numerous outputs. You can keep separate repetitive text instead of repeating it for each table. Updates take place in one file instead of having to open each individual impacted program. In short, centralizing this process is highly desirable within an organization.</p>
+<p>pharmaRTF has the tools you need to make this process simple, and this comes from the function <code>titles_and_footnotes_from_df</code>. This function allows you to import your titles and footnotes from a data frame. That data frame can either come directly from your R session, or you can build a custom reader function to import the data from an external file. So let’s take a look.</p>
+</div>
+<div id="a-small-note" class="section level2">
+<h2>A Small Note</h2>
+<p>Some of the syntax we use throughout this document uses the <code>%&gt;%</code> pipe operator. This is to display support for a tidyverse style of coding. You can find the <code>%&gt;%</code> operator in the <a href="https://cran.r-project.org/package=magrittr/vignettes/magrittr.html">magittr</a> package.</p>
+</div>
+<div id="how-it-works" class="section level2">
+<h2>How It Works</h2>
+<p>The idea behind <code>titles_and_footnotes_from_df</code> is simply that there is a set of expectations of what the data looks like that flows into the function. What that data looks like within an external file is irrelevant, as long as it can be transformed to meet the needs of <code>titles_and_footnotes_from_df</code> on the way in. This is possible because of the <code>reader</code> parameter. The <code>reader</code> parameter is just some function that returns a data frame, and that data frame must be compliant with the required variables and types expected by <code>titles_and_footnotes_from_df</code>. Those variables, types, and requirements are as follows.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Column.Types</th>
+<th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">type</td>
+<td align="left">character</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="even">
+<td align="left">text1</td>
+<td align="left">character</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">text2</td>
+<td align="left">character</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">align</td>
+<td align="left">character</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">bold</td>
+<td align="left">logical</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">italic</td>
+<td align="left">logical</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">font</td>
+<td align="left">character</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">font_size</td>
+<td align="left">numeric</td>
+<td align="left">No</td>
+</tr>
+<tr class="odd">
+<td align="left">index</td>
+<td align="left">numeric</td>
+<td align="left">No</td>
+</tr>
+</tbody>
+</table>
+<p>These variables and types should all look familiar because they’re exactly what’s required for the object <code>hf_line</code>. In fact, <code>titles_and_footnotes_from_df</code> simply takes this data and applies the <code>add_titles</code> and <code>add_footnotes</code> function to the <code>rtf_doc</code> object to attach titles and footnotes.</p>
+<p><code>type</code> and <code>text1</code> are the only required values and this is because <code>titles_and_foonotes_from_df</code> needs to know where to attach the text, and needs to have text to attach. For variables that aren’t required, they may be omitted from the data returned by the reader function and the default values from the <code>hf_line</code> object will be used.</p>
+</div>
+<div id="custom-reader-functions" class="section level2">
+<h2>Custom Reader Functions</h2>
+<p>The entire concept behind <code>titles_and_footnotes_from_df</code> is allowing the freedom of creating your own process. By allowing the user to pass in a custom reader function to the <code>reader</code> parameter, the source of given titles and footnotes can be anything the user wants. You could read from flat text, CSV, Excel, Access, any remote file that R can process and return a data frame meeting the above requirements is on the table.</p>
+<p>With this in mind, let’s consider a simple example. Assume that I have the excel file <code>titles.xlsx</code>. This file looks as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">table_number</th>
+<th align="right">index</th>
+<th align="left">type</th>
+<th align="left">text1</th>
+<th align="left">text2</th>
+<th align="left">align</th>
+<th align="left">bold</th>
+<th align="left">italic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">14-2.01</td>
+<td align="right">1</td>
+<td align="left">title</td>
+<td align="left">Protocol: CDISCPILOT01</td>
+<td align="left">PAGE_FORMAT: Page %s of %s</td>
+<td align="left">split</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">14-2.01</td>
+<td align="right">2</td>
+<td align="left">title</td>
+<td align="left">Population: Intent-to-Treat</td>
+<td align="left">NA</td>
+<td align="left">left</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">14-2.01</td>
+<td align="right">3</td>
+<td align="left">title</td>
+<td align="left">Table 14-2.01</td>
+<td align="left">NA</td>
+<td align="left">center</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">14-2.01</td>
+<td align="right">4</td>
+<td align="left">title</td>
+<td align="left">Summary of Demographic and Baseline Characteristics</td>
+<td align="left">NA</td>
+<td align="left">center</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">14-2.01</td>
+<td align="right">1</td>
+<td align="left">footnote</td>
+<td align="left">[1] P-values are results of ANOVA treatment group comparison for continuous variable and Pearson’s chisquare test for categorical variables.</td>
+<td align="left">NA</td>
+<td align="left">left</td>
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">14-2.01</td>
+<td align="right">2</td>
+<td align="left">footnote</td>
+<td align="left">NOTE: Duration of disease is computed as months between date of enrollment and date of onset of the first definite symptoms of Alzheimer’s disease.</td>
+<td align="left">NA</td>
+<td align="left">left</td>
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">14-2.01</td>
+<td align="right">3</td>
+<td align="left">footnote</td>
+<td align="left">FILE_PATH: Source: %s</td>
+<td align="left">DATE_FORMAT: %H:%M %A, %B %d, %Y</td>
+<td align="left">split</td>
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">14-4.01</td>
+<td align="right">1</td>
+<td align="left">title</td>
+<td align="left">Protocol: CDISCPILOT01</td>
+<td align="left">PAGE_FORMAT: Page %s of %s</td>
+<td align="left">split</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">14-4.01</td>
+<td align="right">2</td>
+<td align="left">title</td>
+<td align="left">Population: Safety</td>
+<td align="left">NA</td>
+<td align="left">left</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">14-4.01</td>
+<td align="right">3</td>
+<td align="left">title</td>
+<td align="left">Table 14-4.01</td>
+<td align="left">NA</td>
+<td align="left">center</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">14-4.01</td>
+<td align="right">4</td>
+<td align="left">title</td>
+<td align="left">Summary of Planned Exposure to Study Drug, as of End of Study</td>
+<td align="left">NA</td>
+<td align="left">center</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">14-4.01</td>
+<td align="right">1</td>
+<td align="left">footnote</td>
+<td align="left">[1] Includes completers and early terminators.</td>
+<td align="left">NA</td>
+<td align="left">left</td>
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">14-4.01</td>
+<td align="right">2</td>
+<td align="left">footnote</td>
+<td align="left">[2] End of Study refers to week 26/Early Termination.</td>
+<td align="left">NA</td>
+<td align="left">left</td>
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">14-4.01</td>
+<td align="right">3</td>
+<td align="left">footnote</td>
+<td align="left">FILE_PATH: Source: %s</td>
+<td align="left">DATE_FORMAT: %H:%M %A, %B %d, %Y</td>
+<td align="left">split</td>
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+<p>(For more information about the special text fields you see here, see our <a href="https://atorus-research.github.io/advanced_usage.html">advanced usage</a> vignette)</p>
+<p>Here I have everything I need to generate my titles. I just need to make sure of two things:</p>
+<ul>
+<li>My column types read in appropriately</li>
+<li>When I read the data, I filter to the appropriate table</li>
+</ul>
+<p>So overall this will be a pretty simple function. Let’s create it.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">example_custom_reader &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">table_number=</span><span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="co"># If a column isn't populated then the type may be guessed wrong so force it</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  col_types &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'text'</span>, <span class="st">'numeric'</span>, <span class="st">'text'</span>, <span class="st">'text'</span>, <span class="st">'text'</span>, <span class="st">'text'</span>, <span class="st">'logical'</span>, <span class="st">'logical'</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="co"># pass through arguments from ...</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  df &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(..., <span class="dt">col_types=</span>col_types)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="co"># Subset and return that dataframe</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  df[df<span class="op">$</span>table_number<span class="op">==</span>table_number, <span class="op">!</span><span class="kw">names</span>(df) <span class="op">==</span><span class="st"> 'table_number'</span>]</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">}</a></code></pre></div>
+<p>Within a few steps I have everything I need:</p>
+<ul>
+<li>I use <code>readxl::read_excel</code> to import the data from the excel file</li>
+<li>I filter the data to just contain rows associated with whatever table I specify</li>
+<li>I remove the <code>table_number</code> column and just keep the variables that need to be sent to <code>titles_and_footnotes_from_df</code></li>
+</ul>
+<p>Note that here I use the <code>...</code> parameter. This is because</p>
+<ol style="list-style-type: lower-alpha">
+<li>the <code>from.file</code> parameter is passed forward into the reader function</li>
+<li>the <code>...</code> option on <code>titles_and_foonotes_from_df</code> is also passed forward, allowing you to pass whatever arguments necessary from the <code>titles_and_footnotes_from_df</code> call into your custom reader.</li>
+</ol>
+<p>With this function now available, let’s see what the function returns.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">example_custom_reader</span>(<span class="st">'titles.xlsx'</span>, <span class="dt">table_number =</span> <span class="st">'14-2.01'</span>)</a></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 100%; margin-left: 0%; margin-right: auto;  ">
+<col><col><col><col><col><col><col><tr>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">index</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">type</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">text1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">text2</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">align</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">bold</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">italic</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">title</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">Protocol: CDISCPILOT01</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">PAGE_FORMAT: Page %s of %s</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">split</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">2</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">title</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;">Population: Intent-to-Treat</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">left</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">TRUE</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">TRUE</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">3</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">title</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">Table 14-2.01</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">center</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">4</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">title</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;">Summary of Demographic and Baseline Characteristics</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">center</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">TRUE</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">TRUE</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">footnote</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">[1] P-values are results of ANOVA treatment group comparison for continuous variable and Pearson's chisquare test for categorical variables.</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">left</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">FALSE</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">2</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">footnote</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;">NOTE: Duration of disease is computed as months between date of enrollment and date of onset of the first definite symptoms of Alzheimer's disease.</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">left</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">FALSE</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">TRUE</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">3</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">footnote</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">FILE_PATH: Source: %s</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">DATE_FORMAT: %H:%M %A, %B %d, %Y</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">split</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">FALSE</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
+</tr>
+</table>
+
+<p>Here can see the data frame that the function processes and returns. In this example, the data processing was very simple - but in a more advanced case this function could read from multiple sheets, merge in default titles and footnotes, read from different data sources - whatever suits your process.</p>
+</div>
+<div id="putting-it-together" class="section level2">
+<h2>Putting It Together</h2>
+<p>Now with an understanding of how a custom reader function works, let’s tie it all together. Let’s assume that our table has been programmed, and that the huxtable table is ready in our session (see the <a href="https://atorus-research.github.io/huxtable_tips.html">huxtable tips vignette</a> to for tips on how to prepare your table). The huxtable table is our session looks like this:</p>
+<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 150%; margin-left: auto; margin-right: auto;  ">
+<col style="width: 36%"><col style="width: 7%"><col style="width: 10%"><col style="width: 11%"><col style="width: 11%"><col style="width: 10%"><col style="width: 11%"><col style="width: 11%"><tr>
+<td style="vertical-align: bottom; text-align: center; white-space: nowrap; padding: 0pt 4pt 0pt 4pt; font-weight: bold;"></td>
+<td style="vertical-align: bottom; text-align: center; white-space: nowrap; padding: 0pt 4pt 0pt 4pt; font-weight: bold;"></td>
+<td colspan="3" style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Completers at Week 24</td>
+<td colspan="3" style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Safety Population [1]</td>
+</tr>
+<tr>
+<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;"></td>
+<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;"></td>
+<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Placebo\line (N=60)</td>
+<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Xanomeline\line Low Dose\line (N=28)</td>
+<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Xanomeline\line High Dose\line (N=30)</td>
+<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Placebo\line (N=86)</td>
+<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Xanomeline\line Low Dose\line (N=84)</td>
+<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Xanomeline\line High Dose\line (N=84)</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Average daily dose (mg)</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">n</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   60     </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   28     </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   30     </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   86     </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   84     </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   84     </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Mean</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   77.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   71.6   </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">SD</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.58  </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    8.11  </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Median</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   76.9   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   75.1   </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Min</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   76.1   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Max</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   78.6   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   78.6   </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Cumulative dose at end of study [2]</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">n</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   60     </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   28     </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   30     </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   86     </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   84     </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   84     </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Mean</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 9918.6   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">14089.5   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 5347.3   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 7551.0   </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">SD</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">  603.84  </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">  481.01  </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 3680.35  </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 5531.04  </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Median</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 9936.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">14080.5   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 4455.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 5778.0   </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Min</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 7884.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">12960.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">  108.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Max</td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">11448.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">15417.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">11448.0   </td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">15417.0   </td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
+</tr>
+</table>
+
+<p><em>Note: The data here comes from the CDISC Pilot, which you can read about <a href="https://www.cdisc.org/sdtmadam-pilot-project">here</a>. Also, see our replication of the tables from this CDISC pilot in our <a href="https://github.com/atorus-research/CDISC_pilot_replication">Github repository</a>.</em></p>
+<p>Here’s how you would go about creating your <code>rtf_doc</code> object. (For more information about the functions being used here, see our <a href="https://atorus-research.github.io/advanced_usage.html">advanced usage</a> vignette)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">doc &lt;-<span class="st"> </span><span class="kw">rtf_doc</span>(ht, <span class="dt">header_rows =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">titles_and_footnotes_from_df</span>(</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="dt">from.file=</span><span class="st">'../data/titles.xlsx'</span>,</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">reader=</span>example_custom_reader,</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="dt">table_number=</span><span class="st">'14-4.01'</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">  </span><span class="kw">set_column_header_buffer</span>(<span class="dt">top=</span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">  </span><span class="kw">set_font_size</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">write_rtf</span>(doc, <span class="dt">file=</span><span class="st">&quot;table16.rtf&quot;</span>)</a></code></pre></div>
+<p>Within the <code>titles_and_footnotes_from_df</code> function you can see the parameters used:</p>
+<ul>
+<li><code>from.file</code> is the location of our titles/footnotes</li>
+<li><code>reader</code> is the function we created within this vignette</li>
+<li><code>table_number</code> is the number of the table we are creating</li>
+</ul>
+<p>In the function call, <code>from.file</code> and <code>table_number</code> are passed forward into the custom reader. From there, validation of the incoming data frame happens, any missing variables have their defaults applied, and then <code>add_titles</code> and <code>add_footnotes</code> are called on the titles and footnotes within the data respectively. You can see in the resulting table that the titles and footnotes have been applied</p>
+<p><img src="data:image/png;base64,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biWp2lB9ezSA+nfjxo22KVrl69+yUZyWRGUXarZi1nJKT9SiWfFP8kCFHvWXqsjS0lkDqIlqI6/o0fKL6fTRaOspMu3qf04mttbWOlu1yLadPvbYY4pDksfmwtyesJr5qi3ZiEbT3oUcmuouukgp2y/UMt7rAID6YyGHWxYPDQ0p6rBN/965rtZajqTusxpd8oeHh5WvlZA2rYCWYm+//Xbl8UfslmTqFqPdB7W0uwfvZxr3rOLyaqHd9XS7TrU2tfcU/xav5O7UFNej8VTb7t69+/nnn6tJX3311c2bN21JlNt+CeVbVUroKKRu5WbpwLkdZUfbjrL24tcPX+4UldDE8M8O48a2eKI6qspOHKXtHHTL5eLDpKp0ktqxVjMuXbpkAU/ohM2emK6kNjVRHz3h6zvNjkbZE8Qv79cj2Xa6N/dce1IvICHFR636fNS+1Hsd37BpLS+//PJrr71maQBALRsZGdEF+LnnnrPNF1980W7VaxX7m9/8Rpfnt956a8mSJbpU699//ud//vTTT5966iktUK5cuaIVw9/+9rd///d//973vnf16tU//elPq1ev/v73v68Cv/rVr7QIVm1Wrcqo/Le//W13pdBi5datW/39/Zs3b1b5s2fP3r9/X83Q3rUjFbZd61F7yrTlRa164YUXfvvb32odo/b75bUy8/eepWWfShq1/H/+z//56quvKj/UnhCNz2OPPaYaHjx4oMH5v//3/37zm99UJaH2h/JVlQ7N8uXLdRSWLl36P/7H/7D6QzTU1mD513/9V+1arbVNDcWf//zn9957TxU+/fTT7ljDpwmg8dE80b/+1A1NDA2jcnS4ldCcV9oGttTEVlWq046OnquS169fV4F//Md/fLTvgIsXL2peWTP+7d/+bcWKFao8dMLmnphvvvmmNeb111+3xqTmRvaELXuCWHl7yK8nt52uEp07Ggprp/4tPtck205TNh+175NPPvnss8+SDT5hBQCN5Msvv1y/fr3dEdQiXmuICxcu2EPLli2zhJY7+td9IkuLY7s9qWfpuarB8nNNTk5qXb67wm5z3rhxwx7KNW15u1Orptp938cff9wvv2vXrmnvbh44cMDKf/7551r/JbklWchhN5i1+hQbrlD7i/ullqieUh/cVz2qUAGhbV6+fFmVaHBsEwU0SWygNGIaRg2d5ZeaGGUntp0y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AIiLqAMAAABAXEQdAAAAAOIi6gAAAAAQF1EHAAAAgLiIOgAAAADERdQBAAAAIC6iDgAAAABxEXUAAAAAiIuoAwAAAEBcRB0AAAAA4iLqAAAAABAXUQcAAACAuIg6AAAAAMRF1AEAAAAgLqIOAAAAAHERdQAAAACIi6gDAAAAQFxEHQAAAADiIuoAAAAAEBdRBwAAAIC4iDoAAAAAxEXUAQAAACAuog4AAAAAcRF1AAAAAIiLqAMAAABAXEQdAAAAAOIi6gAAAAAQF1EHAAAAgLiIOgAAAADERdQBAAAAIC6iDgAAAABxEXUAAAAAiIuoAwAAAEBcRB0AAAAA4iLqAAAAABAXUQcAAACAuIg6AAAAAMRF1AEAAAAgLqIOAAAAAHERdQAAAACIi6gDAAAAQFxEHQAAAADiIuoAAAAAEBdRBwAAAIC4iDoAAAAAxEXUAQAAACAuog4AAAAAcRF1AAAAAIiLqAMAAABAXEQdAAAAAOIi6gAAAAAQF1EHAAAAgLiIOgAAAADERdQBAAAAIC6iDgAAAABxEXUAAAAAiIuoAwAAAEBcRB0AAAAA4iLqAAAAABAXUQcAAACAuIg6AAAAAMRF1AEAAAAgLqIOAAAAAHERdQAAAACIi6gDAAAAQFxEHQAAAADiIuoAAAAAEBdRBwAAAIC4iDoAAAAAxEXUAQAAACAuog4AAAAAcRF1AAAAAIiLqAMAAABAXEQdAAAAAOIi6gAAAAAQF1EHAAAAgLiIOgAAAADERdQBAAAAIC6iDgAAAABxEXUAAAAAiIuoAwAAAEBcRB0AAAAA4iLqAAAAABAXUQcAAACAuIg6AAAAAMRF1AEAAAAgLqIOAAAAAHERdQAAAACIi6gDAAAAQFxEHQAAAADiIuoAAAAAEBdRBwAAAIC4iDoAAAAAxEXUAQAAACAuog4AAAAAcRF1AAAAAIiLqAMAAABAXEQdAAAAAOIi6gAAAAAQF1EHAAAAgLiIOgAAAADERdQBAAAAIC6iDgAAAABxEXUAAAAAiIuoAwAAAEBcRB0AAAAA4iLqAAAAABAXUQcAAACAuIg6AAAAAMRF1AEAAAAgLqIOAAAAAHERdQAAAACIi6gDAAAAQFxEHQAAAADiIuoAAAAAEBdRBwAAAIC4iDoAAAAAxEXUAQAAACAuog4AAAAAcRF1AAAAAIiLqAMAAABAXEQdAAAA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" width="800px" /></p>
+<p>And there you have it. By using this process, the addition of titles and footnotes to your <code>rtf_doc</code> greatly simplifies, and this code becomes very reusable from program to program, allowing you to focus on the nuance of your table creation rather than the redundant application of creating titles and footnotes. As mentioned, it’s necessary to be able to manually specify your titles and footnotes as needed - but automating the process of applying them is much more desirable when your studies reach a certain scale.</p>
+</div>
+<div id="further-reading" class="section level2">
+<h2>Further Reading</h2>
+<p>If you have not already reviewed them, be sure to check out our other vignettes</p>
+<ul>
+<li>To pick up the basics of using pharmaRTF, see <a href="https://atorus-research.github.io/pharmaRTF.html">this vignette</a></li>
+<li>To learn tips and tricks for using huxtable with pharmaRTF, see <a href="https://atorus-research.github.io/huxtable_tips.html">this vignette</a></li>
+<li>To learn more advanced usage of pharmaRTF, see <a href="https://atorus-research.github.io/advanced_usage.html">this vignette</a></li>
+</ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
