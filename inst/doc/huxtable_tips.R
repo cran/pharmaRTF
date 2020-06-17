@@ -13,7 +13,7 @@ ht <- huxtable::as_hux(iris[, c("Species", "Sepal.Length", "Sepal.Width", "Petal
 ht[1:10, c('Species', 'Petal.Width')]
 
 ## ----print_screen-------------------------------------------------------------
-huxtable::print_screen(ht[1:10])
+huxtable::print_screen(ht[1:10,])
 
 ## ----set width----------------------------------------------------------------
 # Assign the attribute
@@ -23,7 +23,7 @@ huxtable::width(ht) <- 1.5
 ht <- ht %>% 
   huxtable::set_width(1.5)
 
-ht[1:10]
+ht[1:10,]
 
 
 ## ----column_widths------------------------------------------------------------
@@ -34,7 +34,7 @@ huxtable::col_width(ht) <- c(.4, .15, .15, .15, .15)
 ht <- ht %>% 
   huxtable::set_col_width(c(.4, .15, .15, .15, .15))
 
-ht[1:10]
+ht[1:10,]
 
 
 ## ----column names-------------------------------------------------------------
@@ -51,7 +51,7 @@ column_headers <- data.frame(
 )
 
 ht <- huxtable::as_hux(rbind(column_headers, iris))
-ht[1:10]
+ht[1:10,]
 
 ## ----cell formatting----------------------------------------------------------
 # Assign attributes directly to object
@@ -67,7 +67,7 @@ ht <- ht %>%
   # Align the 3rd row, 2nd column right
   huxtable::set_align(3, 2, 'right') 
 
-ht[1:10]
+ht[1:10,]
 
 
 ## ----spanning header----------------------------------------------------------
@@ -98,7 +98,7 @@ ht <- huxtable::as_hux(rbind(column_headers, iris)) %>%
   # Bottom border on 2nd row
   huxtable::set_bottom_border(2, 1:ncol(iris), 2)
 
-ht[1:10]
+ht[1:10,]
 
 ## ----line breaks--------------------------------------------------------------
 # Overwrite the column header cell
@@ -107,7 +107,7 @@ ht[2, 1] <- "Species of\\line flower"
 huxtable::escape_contents(ht) <- FALSE
 # Set display width
 huxtable::width(ht) <- 1.5
-ht[1:10]
+ht[1:10,]
 
 doc <- rtf_doc(ht, header_rows = 2)
 write_rtf(doc, file='table4.rtf')

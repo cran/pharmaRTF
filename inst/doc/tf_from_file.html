@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mike Stackhouse" />
 
-<meta name="date" content="2020-05-14" />
+<meta name="date" content="2020-06-17" />
 
 <title>Sourcing Titles and Footnotes From External Files</title>
 
@@ -301,7 +301,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Sourcing Titles and Footnotes From External Files</h1>
 <h4 class="author">Mike Stackhouse</h4>
-<h4 class="date">2020-05-14</h4>
+<h4 class="date">2020-06-17</h4>
 
 
 
@@ -567,244 +567,57 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li>the <code>...</code> option on <code>titles_and_foonotes_from_df</code> is also passed forward, allowing you to pass whatever arguments necessary from the <code>titles_and_footnotes_from_df</code> call into your custom reader.</li>
 </ol>
 <p>With this function now available, let’s see what the function returns.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">example_custom_reader</span>(<span class="st">'titles.xlsx'</span>, <span class="dt">table_number =</span> <span class="st">'14-2.01'</span>)</a></code></pre></div>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 100%; margin-left: 0%; margin-right: auto;  ">
-<col><col><col><col><col><col><col><tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">index</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">type</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">text1</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">text2</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">align</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">bold</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">italic</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">title</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">Protocol: CDISCPILOT01</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">PAGE_FORMAT: Page %s of %s</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">split</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">2</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">title</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;">Population: Intent-to-Treat</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">left</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">TRUE</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">TRUE</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">3</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">title</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">Table 14-2.01</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">center</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">4</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">title</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;">Summary of Demographic and Baseline Characteristics</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">center</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">TRUE</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">TRUE</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">footnote</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">[1] P-values are results of ANOVA treatment group comparison for continuous variable and Pearson's chisquare test for categorical variables.</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">left</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">FALSE</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">2</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">footnote</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;">NOTE: Duration of disease is computed as months between date of enrollment and date of onset of the first definite symptoms of Alzheimer's disease.</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; padding: 4pt 4pt 4pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">left</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">FALSE</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">TRUE</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">3</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">footnote</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">FILE_PATH: Source: %s</td>
-<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">DATE_FORMAT: %H:%M %A, %B %d, %Y</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">split</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">FALSE</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">TRUE</td>
-</tr>
-</table>
-
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">example_custom_reader</span>(<span class="st">'titles.xlsx'</span>, <span class="dt">table_number =</span> <span class="st">'14-2.01'</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; # A tibble: 7 x 7</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;   index type    text1                          text2          align bold  italic</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                          &lt;chr&gt;          &lt;chr&gt; &lt;lgl&gt; &lt;lgl&gt; </span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; 1     1 title   Protocol: CDISCPILOT01         PAGE_FORMAT: … split TRUE  TRUE  </span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; 2     2 title   Population: Intent-to-Treat    &lt;NA&gt;           left  TRUE  TRUE  </span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 3     3 title   Table 14-2.01                  &lt;NA&gt;           cent… TRUE  TRUE  </span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; 4     4 title   Summary of Demographic and Ba… &lt;NA&gt;           cent… TRUE  TRUE  </span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; 5     1 footno… [1] P-values are results of A… &lt;NA&gt;           left  FALSE TRUE  </span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; 6     2 footno… </span><span class="al">NOTE</span><span class="co">: Duration of disease is … &lt;NA&gt;           left  FALSE TRUE  </span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; 7     3 footno… FILE_PATH: Source: %s          DATE_FORMAT: … split FALSE TRUE</span></a></code></pre></div>
 <p>Here can see the data frame that the function processes and returns. In this example, the data processing was very simple - but in a more advanced case this function could read from multiple sheets, merge in default titles and footnotes, read from different data sources - whatever suits your process.</p>
 </div>
 <div id="putting-it-together" class="section level2">
 <h2>Putting It Together</h2>
 <p>Now with an understanding of how a custom reader function works, let’s tie it all together. Let’s assume that our table has been programmed, and that the huxtable table is ready in our session (see the <a href="https://atorus-research.github.io/huxtable_tips.html">huxtable tips vignette</a> to for tips on how to prepare your table). The huxtable table is our session looks like this:</p>
-<table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 150%; margin-left: auto; margin-right: auto;  ">
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 150%; margin-left: auto; margin-right: auto;  " id="tab:show_huxtable">
 <col style="width: 36%"><col style="width: 7%"><col style="width: 10%"><col style="width: 11%"><col style="width: 11%"><col style="width: 10%"><col style="width: 11%"><col style="width: 11%"><tr>
-<td style="vertical-align: bottom; text-align: center; white-space: nowrap; padding: 0pt 4pt 0pt 4pt; font-weight: bold;"></td>
-<td style="vertical-align: bottom; text-align: center; white-space: nowrap; padding: 0pt 4pt 0pt 4pt; font-weight: bold;"></td>
-<td colspan="3" style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Completers at Week 24</td>
-<td colspan="3" style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Safety Population [1]</td>
-</tr>
+<th style="vertical-align: bottom; text-align: center; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: bold;">rowlbl1</th><th style="vertical-align: bottom; text-align: center; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: bold;">rowlbl2</th><th colspan="3" style="vertical-align: bottom; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: bold;">0_C</th><th colspan="3" style="vertical-align: bottom; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: bold;">0_S</th></tr>
 <tr>
-<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;"></td>
-<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;"></td>
-<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Placebo\line (N=60)</td>
-<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Xanomeline\line Low Dose\line (N=28)</td>
-<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Xanomeline\line High Dose\line (N=30)</td>
-<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Placebo\line (N=86)</td>
-<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Xanomeline\line Low Dose\line (N=84)</td>
-<td style="vertical-align: bottom; text-align: center; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt; padding: 0pt 4pt 0pt 4pt; font-weight: bold;">Xanomeline\line High Dose\line (N=84)</td>
-</tr>
+<td style="vertical-align: bottom; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: bold;"></td><td style="vertical-align: bottom; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: bold;"></td><td style="vertical-align: bottom; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: bold;">Completers at Week 24</td><td style="vertical-align: bottom; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: bold;"></td><td style="vertical-align: bottom; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: bold;"></td><td style="vertical-align: bottom; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 1pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: bold;">Safety Population [1]</td><td style="vertical-align: bottom; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: bold;"></td><td style="vertical-align: bottom; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 1pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: bold;"></td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Average daily dose (mg)</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">n</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   60     </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   28     </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   30     </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   86     </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   84     </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   84     </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Placebo\line (N=60)</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Xanomeline\line Low Dose\line (N=28)</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Xanomeline\line High Dose\line (N=30)</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Placebo\line (N=86)</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Xanomeline\line Low Dose\line (N=84)</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 1pt 0pt 0pt 0pt;    padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Xanomeline\line High Dose\line (N=84)</td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Mean</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   77.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   71.6   </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Average daily dose (mg)</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">n</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   60     </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   28     </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   30     </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   86     </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   84     </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   84     </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">SD</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.58  </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    8.11  </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Mean</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   54.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   77.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   54.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   71.6   </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Median</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   76.9   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   75.1   </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">SD</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.00  </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.00  </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.58  </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.00  </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.00  </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    8.11  </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Min</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   76.1   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Median</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   54.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   76.9   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   54.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   75.1   </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Max</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   78.6   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   78.6   </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Min</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   54.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   76.1   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   54.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   54.0   </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Max</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   54.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   78.6   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   54.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   78.6   </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Cumulative dose at end of study [2]</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">n</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   60     </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   28     </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   30     </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   86     </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   84     </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   84     </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Mean</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 9918.6   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">14089.5   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 5347.3   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 7551.0   </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Cumulative dose at end of study [2]</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">n</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   60     </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   28     </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   30     </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   86     </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   84     </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   84     </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">SD</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">  603.84  </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">  481.01  </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.00  </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 3680.35  </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 5531.04  </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Mean</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"> 9918.6   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">14089.5   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"> 5347.3   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"> 7551.0   </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Median</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 9936.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">14080.5   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 4455.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 5778.0   </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">SD</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.00  </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">  603.84  </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">  481.01  </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.00  </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"> 3680.35  </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"> 5531.04  </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Min</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"> 7884.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">12960.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">  108.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">   54.0   </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Median</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"> 9936.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">14080.5   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"> 4455.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"> 5778.0   </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">Max</td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">11448.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">15417.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">    0.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">11448.0   </td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;">15417.0   </td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Min</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"> 7884.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">12960.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">  108.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">   54.0   </td></tr>
 <tr>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-<td style="vertical-align: top; text-align: left; white-space: nowrap; padding: 0pt 4pt 0pt 4pt;"></td>
-</tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">Max</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">11448.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">15417.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">    0.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">11448.0   </td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;">15417.0   </td></tr>
+<tr>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 0pt 6pt 0pt 6pt; font-weight: normal;"></td></tr>
 </table>
 
 <p><em>Note: The data here comes from the CDISC Pilot, which you can read about <a href="https://www.cdisc.org/sdtmadam-pilot-project">here</a>. Also, see our replication of the tables from this CDISC pilot in our <a href="https://github.com/atorus-research/CDISC_pilot_replication">Github repository</a>.</em></p>

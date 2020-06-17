@@ -60,7 +60,7 @@ ht <- huxtable::as_hux(rbind(column_headers, iris)) %>%
   # Set the page width
   huxtable::set_width(1.5)
 
-ht[1:10]
+ht[1:10,]
 
 ## ----column_headers2, eval=FALSE----------------------------------------------
 #  doc <- rtf_doc(ht, header_rows=2)
@@ -70,6 +70,19 @@ ht[1:10]
 
 ## ----table6_img1, out.width = "800px", echo = FALSE---------------------------
 knitr::include_graphics("table6_img1.png")
+
+## ----column_headers3, eval=FALSE----------------------------------------------
+#  # Method 1
+#  doc <- rtf_doc(ht, header_rows=0)
+#  
+#  # Method 2
+#  doc <- rtf_doc(ht) %>%
+#    set_header_rows(0)
+#  
+#  write_rtf(doc, file="table6.rtf")
+
+## ----table6_img2, out.width = "800px", echo = FALSE---------------------------
+knitr::include_graphics("table6_img2.png")
 
 ## ----ignore_cell_padding, eval=FALSE------------------------------------------
 #  doc <- rtf_doc(ht, header_rows=2) %>%

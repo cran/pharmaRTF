@@ -15,7 +15,7 @@ ht <- huxtable::as_hux(dat, add_colnames=TRUE) %>%
   huxtable::set_bold(1, 1:ncol(dat), TRUE) %>% 
   huxtable::set_bottom_border(1, 1:ncol(dat), 1) %>% 
   huxtable::set_width(1.5)
-ht[1:10]
+ht[1:10,]
 
 ## ----table1, eval=FALSE-------------------------------------------------------
 #  doc <- rtf_doc(ht, titles=list(hf_line("The Iris Dataset", bold=TRUE)))
