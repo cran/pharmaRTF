@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mike Stackhouse" />
 
-<meta name="date" content="2021-05-27" />
+<meta name="date" content="2021-09-28" />
 
 <title>Sourcing Titles and Footnotes From External Files</title>
 
@@ -40,6 +40,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -140,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">Sourcing Titles and Footnotes From External Files</h1>
 <h4 class="author">Mike Stackhouse</h4>
-<h4 class="date">2021-05-27</h4>
+<h4 class="date">2021-09-28</h4>
 
 
 
@@ -418,15 +419,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>With this function now available, let’s see what the function returns.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">example_custom_reader</span>(<span class="st">&#39;titles.xlsx&#39;</span>, <span class="at">table_number =</span> <span class="st">&#39;14-2.01&#39;</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 x 7</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   index type    text1                          text2          align bold  italic</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                          &lt;chr&gt;          &lt;chr&gt; &lt;lgl&gt; &lt;lgl&gt; </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     1 title   Protocol: CDISCPILOT01         PAGE_FORMAT: … split TRUE  TRUE  </span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     2 title   Population: Intent-to-Treat    &lt;NA&gt;           left  TRUE  TRUE  </span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     3 title   Table 14-2.01                  &lt;NA&gt;           cent… TRUE  TRUE  </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     4 title   Summary of Demographic and Ba… &lt;NA&gt;           cent… TRUE  TRUE  </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5     1 footno… [1] P-values are results of A… &lt;NA&gt;           left  FALSE TRUE  </span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6     2 footno… </span><span class="al">NOTE</span><span class="co">: Duration of disease is … &lt;NA&gt;           left  FALSE TRUE  </span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7     3 footno… FILE_PATH: Source: %s          DATE_FORMAT: … split FALSE TRUE</span></span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   index type     text1                         text2          align bold  italic</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                         &lt;chr&gt;          &lt;chr&gt; &lt;lgl&gt; &lt;lgl&gt; </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     1 title    Protocol: CDISCPILOT01        PAGE_FORMAT: … split TRUE  TRUE  </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     2 title    Population: Intent-to-Treat   &lt;NA&gt;           left  TRUE  TRUE  </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     3 title    Table 14-2.01                 &lt;NA&gt;           cent… TRUE  TRUE  </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     4 title    Summary of Demographic and B… &lt;NA&gt;           cent… TRUE  TRUE  </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5     1 footnote [1] P-values are results of … &lt;NA&gt;           left  FALSE TRUE  </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6     2 footnote </span><span class="al">NOTE</span><span class="co">: Duration of disease is… &lt;NA&gt;           left  FALSE TRUE  </span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7     3 footnote FILE_PATH: Source: %s         DATE_FORMAT: … split FALSE TRUE</span></span></code></pre></div>
 <p>Here can see the data frame that the function processes and returns. In this example, the data processing was very simple - but in a more advanced case this function could read from multiple sheets, merge in default titles and footnotes, read from different data sources - whatever suits your process.</p>
 </div>
 <div id="putting-it-together" class="section level2">
