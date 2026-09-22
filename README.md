@@ -1,10 +1,6 @@
 # pharmaRTF 
-[<img src="https://img.shields.io/badge/Slack-OSTCR-blue?style=flat&logo=slack">](https://ostinclinicalresearch.slack.com)
-[<img src="https://img.shields.io/badge/Slack-RValidationHub-blue?style=flat&logo=slack">](https://RValidationHub.slack.com)
 [<img src="https://img.shields.io/cran/v/pharmaRTF">](https://cran.r-project.org/package=pharmaRTF)
-[![R build
-status](https://github.com/atorus-research/pharmaRTF/workflows/R-CMD-check/badge.svg)](https://github.com/atorus-research/pharmaRTF/actions?workflow=R-CMD-check)
-[<img src="https://img.shields.io/codecov/c/github/atorus-research/pharmaRTF">](https://codecov.io/gh/atorus-research/pharmaRTF)
+[<img src="https://img.shields.io/codecov/c/github/atorus-research/pharmaRTF">](https://app.codecov.io/gh/atorus-research/pharmaRTF)
 [<img src="https://img.shields.io/badge/License-MIT-blue.svg">](https://github.com/atorus-research/pharmaRTF/blob/master/LICENSE.md)
 [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/pharmaRTF)](https://cran.r-project.org/package=pharmaRTF)
 

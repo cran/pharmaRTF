@@ -38,20 +38,31 @@ example_custom_reader <- function(..., table_number=NULL) {
 example_custom_reader('titles.xlsx', table_number = '14-2.01')
 
 ## ----prep_huxtable, echo=FALSE, results='hide'--------------------------------
-huxtable::as_hux(load('t14_4_01.Rdata'))
+# load() brings in the object `ht`. It was serialized under an older huxtable
+# and so is missing table level properties added since (`breakable`, for
+# example), which newer huxtable versions error on. Rebuild it under the
+# installed huxtable and carry the saved properties back over, leaving any
+# newer property at its current default.
+load('t14_4_01.Rdata')
+saved <- ht
+ht <- huxtable::as_hux(as.data.frame(saved), add_colnames = FALSE)
+for (prop in setdiff(names(attributes(saved)), c('class', 'names', 'row.names'))) {
+  attr(ht, prop) <- attr(saved, prop)
+}
+rm(saved, prop)
 
 ## ----show_huxtable, echo=FALSE------------------------------------------------
 ht
 
 ## ----create_rtfdoc, eval=FALSE------------------------------------------------
-#  doc <- rtf_doc(ht, header_rows = 2) %>% titles_and_footnotes_from_df(
-#    from.file='../data/titles.xlsx',
-#    reader=example_custom_reader,
-#    table_number='14-4.01') %>%
-#    set_column_header_buffer(top=1) %>%
-#    set_font_size(10)
-#  
-#  write_rtf(doc, file="table16.rtf")
+# doc <- rtf_doc(ht, header_rows = 2) %>% titles_and_footnotes_from_df(
+#   from.file='../data/titles.xlsx',
+#   reader=example_custom_reader,
+#   table_number='14-4.01') %>%
+#   set_column_header_buffer(top=1) %>%
+#   set_font_size(10)
+# 
+# write_rtf(doc, file="table16.rtf")
 
 ## ----table1_img1, out.width = "800px", echo = FALSE---------------------------
 knitr::include_graphics("table16_img1.png")
